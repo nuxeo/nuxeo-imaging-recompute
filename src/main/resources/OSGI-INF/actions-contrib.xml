@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.imaging.recompute.actions">
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="actions">
+
+    <action id="recomputePictureViews" order="-100"
+      link="#{imagingRecomputeActions.recomputePictureViews}"
+      label="label.imaging.recompute.picture.views" icon="/icons/generate.png">
+      <category>DOCUMENT_UPPER_ACTION</category>
+      <filter-id>hasPictureFacet</filter-id>
+    </action>
+
+    <action id="Imaging" link="/incl/imaging/imaging_admin_recompute_views.xhtml" label="adm.imaging"
+      order="150">
+      <category>NUXEO_ADMIN</category>
+      <filter-id>only_for_manager</filter-id>
+      <filter-id>canRecomputePictureViews</filter-id>
+    </action>
+
+  </extension>
+
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="filters">
+
+    <filter id="canRecomputePictureViews">
+      <rule grant="true">
+        <permission>Write</permission>
+      </rule>
+    </filter>
+
+  </extension>
+
+</component>
