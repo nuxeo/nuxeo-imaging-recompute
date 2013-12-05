@@ -22,6 +22,7 @@ import static org.nuxeo.ecm.platform.picture.api.ImagingDocumentConstants.PICTUR
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
+import org.nuxeo.ecm.core.api.IdRef;
 import org.nuxeo.ecm.core.api.UnrestrictedSessionRunner;
 import org.nuxeo.ecm.core.api.blobholder.BlobHolder;
 import org.nuxeo.ecm.core.work.AbstractWork;
@@ -47,32 +48,28 @@ public class ImagingRecomputeWork extends AbstractWork {
 
     @Override
     public void work() throws Exception {
-        new UnrestrictedSessionRunner(repositoryName) {
+        setProgress(Progress.PROGRESS_INDETERMINATE);
 
-            @Override
-            public void run() throws ClientException {
-                DocumentModelList docs = session.query(nxqlQuery);
-                long docsUpdated = 0;
+        initSession();
+        DocumentModelList docs = session.query(nxqlQuery);
+        long docsUpdated = 0;
 
-                for (DocumentModel doc : docs) {
-                    if (doc.hasFacet(PICTURE_FACET)) {
-                        BlobHolder blobHolder = doc.getAdapter(BlobHolder.class);
-                        if (blobHolder.getBlob() != null) {
-                            blobHolder.setBlob(blobHolder.getBlob());
-                            session.saveDocument(doc);
-                            docsUpdated++;
-                            if (docsUpdated % BATCH_SIZE == 0) {
-                                if (TransactionHelper.isTransactionActiveOrMarkedRollback()) {
-                                    TransactionHelper.commitOrRollbackTransaction();
-                                }
-                                TransactionHelper.startTransaction();
-                            }
-                        }
+        setStatus("Generating views");
+        for (DocumentModel doc : docs) {
+            if (doc.hasFacet(PICTURE_FACET)) {
+                BlobHolder blobHolder = doc.getAdapter(BlobHolder.class);
+                if (blobHolder.getBlob() != null) {
+                    blobHolder.setBlob(blobHolder.getBlob());
+                    session.saveDocument(doc);
+                    docsUpdated++;
+                    if (docsUpdated % BATCH_SIZE == 0) {
+                        commitOrRollbackTransaction();
+                        startTransaction();
                     }
                 }
             }
-
-        }.runUnrestricted();
+        }
+        setStatus("Done");
     }
 
 }
