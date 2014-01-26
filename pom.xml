@@ -5,6 +5,7 @@
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-platform-imaging-parent</artifactId>
     <version>5.9.2-SNAPSHOT</version>
+    <relativePath>../../nuxeo-features/nuxeo-platform-imaging/pom.xml</relativePath>
   </parent>
 
   <artifactId>nuxeo-imaging-recompute</artifactId>
