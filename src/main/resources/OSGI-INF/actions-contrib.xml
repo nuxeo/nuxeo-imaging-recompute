@@ -11,6 +11,7 @@
     </action>
 
     <action id="Imaging" link="/incl/imaging/imaging_admin_recompute_views.xhtml" label="adm.imaging"
+      type="admin_rest_document_link"
       order="150">
       <category>NUXEO_ADMIN</category>
       <filter-id>only_for_manager</filter-id>
