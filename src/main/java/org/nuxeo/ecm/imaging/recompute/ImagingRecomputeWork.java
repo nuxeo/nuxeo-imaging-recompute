@@ -47,7 +47,7 @@ public class ImagingRecomputeWork extends AbstractWork {
     }
 
     @Override
-    public void work() throws Exception {
+    public void work() {
         setProgress(Progress.PROGRESS_INDETERMINATE);
 
         initSession();
