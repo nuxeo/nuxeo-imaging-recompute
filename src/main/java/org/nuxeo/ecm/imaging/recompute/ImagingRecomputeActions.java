@@ -76,14 +76,12 @@ public class ImagingRecomputeActions implements Serializable {
             BlobHolder blobHolder = doc.getAdapter(BlobHolder.class);
             if (blobHolder.getBlob() != null) {
                 blobHolder.setBlob(blobHolder.getBlob());
-                Events.instance().raiseEvent(
-                        EventNames.BEFORE_DOCUMENT_CHANGED, doc);
+                Events.instance().raiseEvent(EventNames.BEFORE_DOCUMENT_CHANGED, doc);
                 documentManager.saveDocument(doc);
                 documentManager.save();
                 navigationContext.invalidateCurrentDocument();
             }
-            facesMessages.addFromResourceBundle(StatusMessage.Severity.INFO,
-                    "label.imaging.recompute.views.done");
+            facesMessages.addFromResourceBundle(StatusMessage.Severity.INFO, "label.imaging.recompute.views.done");
         }
     }
 
@@ -94,13 +92,10 @@ public class ImagingRecomputeActions implements Serializable {
         }
 
         if (!StringUtils.isBlank(nxqlQuery)) {
-            ImagingRecomputeWork work = new ImagingRecomputeWork(
-                    documentManager.getRepositoryName(), nxqlQuery);
-            workManager.schedule(work,
-                    WorkManager.Scheduling.IF_NOT_RUNNING_OR_SCHEDULED);
+            ImagingRecomputeWork work = new ImagingRecomputeWork(documentManager.getRepositoryName(), nxqlQuery);
+            workManager.schedule(work, WorkManager.Scheduling.IF_NOT_RUNNING_OR_SCHEDULED);
 
-            facesMessages.addFromResourceBundle(StatusMessage.Severity.INFO,
-                    "label.imaging.recompute.work.launched");
+            facesMessages.addFromResourceBundle(StatusMessage.Severity.INFO, "label.imaging.recompute.work.launched");
         }
 
     }
