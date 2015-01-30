@@ -45,6 +45,8 @@ public class ImagingRecomputeActions implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final String DEFAULT_NXQL_QUERY = "SELECT * FROM Document WHERE ecm:mixinType = 'Picture' AND picture:views/*/title IS NULL";
+
     @In(create = true, required = false)
     protected transient CoreSession documentManager;
 
@@ -57,7 +59,7 @@ public class ImagingRecomputeActions implements Serializable {
     @In(create = true, required = false)
     protected FacesMessages facesMessages;
 
-    protected String nxqlQuery = "";
+    protected String nxqlQuery = DEFAULT_NXQL_QUERY;
 
     public String getNxqlQuery() {
         return nxqlQuery;

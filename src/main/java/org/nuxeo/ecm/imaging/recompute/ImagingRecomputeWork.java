@@ -19,14 +19,10 @@ package org.nuxeo.ecm.imaging.recompute;
 
 import static org.nuxeo.ecm.platform.picture.api.ImagingDocumentConstants.PICTURE_FACET;
 
-import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
-import org.nuxeo.ecm.core.api.IdRef;
-import org.nuxeo.ecm.core.api.UnrestrictedSessionRunner;
 import org.nuxeo.ecm.core.api.blobholder.BlobHolder;
 import org.nuxeo.ecm.core.work.AbstractWork;
-import org.nuxeo.runtime.transaction.TransactionHelper;
 
 public class ImagingRecomputeWork extends AbstractWork {
 
