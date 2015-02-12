@@ -3,15 +3,20 @@
 
   <ui:include src="/incl/message_banner.xhtml"/>
 
-  <h:outputText value="#{messages['label.imaging.recompute.enterNXQL']}"/>
-  <h:form id="imagingPictureViewsRecomputationForm">
-    <h:inputText value="#{imagingRecomputeActions.nxqlQuery}"
-      size="80"
-      required="true" />
-    <br/>
-    <h:commandButton value="#{messages['command.recompute']}" styleClass="button"
-      action="#{imagingRecomputeActions.launchPictureViewsRecomputation()}">
-    </h:commandButton>
-  </h:form>
+  <div class="bubbleBox bubbleShadow">
+    <h3>
+      <h:outputText value="#{messages['label.imaging.recompute.enterNXQL']}"/>
+    </h3>
+
+    <h:form id="imagingPictureViewsRecomputationForm">
+      <h:inputText value="#{imagingRecomputeActions.nxqlQuery}"
+        size="80"
+        required="true" />
+      <br/>
+      <h:commandButton value="#{messages['command.recompute']}" styleClass="button"
+        action="#{imagingRecomputeActions.launchPictureViewsRecomputation()}">
+      </h:commandButton>
+    </h:form>
+  </div>
 
 </div>
