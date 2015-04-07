@@ -23,7 +23,9 @@ To enable it, you can add the following contribution:
 
 A new section "Imaging" is available in which an administrator can launch the recomputation of a set of Picture through a NXQL query. The recomputation is done in an asynchronous way.
 
+## QA results
 
+[![Build Status](https://qa.nuxeo.org/jenkins/buildStatus/icon?job=addons_nuxeo-imaging-recompute-master)](https://qa.nuxeo.org/jenkins/job/addons_nuxeo-imaging-recompute-master/)
 
 
 ## About Nuxeo
