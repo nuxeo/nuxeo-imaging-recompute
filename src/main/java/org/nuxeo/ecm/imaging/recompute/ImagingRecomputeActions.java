@@ -69,11 +69,11 @@ public class ImagingRecomputeActions implements Serializable {
         this.nxqlQuery = nxqlQuery;
     }
 
-    public void recomputePictureViews() throws ClientException {
+    public void recomputePictureViews() {
         recomputePictureViews(navigationContext.getCurrentDocument());
     }
 
-    public void recomputePictureViews(DocumentModel doc) throws ClientException {
+    public void recomputePictureViews(DocumentModel doc) {
         if (doc.hasFacet(PICTURE_FACET)) {
             BlobHolder blobHolder = doc.getAdapter(BlobHolder.class);
             if (blobHolder.getBlob() != null) {
