@@ -46,7 +46,7 @@ public class ImagingRecomputeWork extends AbstractWork {
     public void work() {
         setProgress(Progress.PROGRESS_INDETERMINATE);
 
-        initSession();
+        openSystemSession();
         DocumentModelList docs = session.query(nxqlQuery);
         long docsUpdated = 0;
 
