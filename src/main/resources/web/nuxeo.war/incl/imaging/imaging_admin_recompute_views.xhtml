@@ -19,4 +19,36 @@
     </h:form>
   </div>
 
+  <div class="bubbleBox">
+    <h3>
+      <h:outputText value="#{messages['label.video.recompute.enterNXQL']}"/>
+    </h3>
+
+    <h:form id="imagingVideoRecomputationForm">
+      <h:inputText value="#{imagingRecomputeActions.videoQuery}"
+        size="80"
+        required="true" />
+      <br/>
+      <h:commandButton value="#{messages['command.recompute']}" styleClass="button"
+        action="#{imagingRecomputeActions.launchPictureViewsRecomputation()}">
+      </h:commandButton>
+    </h:form>
+  </div>
+
+
+  <div class="bubbleBox">
+    <h3>
+      <h:outputText value="#{messages['label.thumb.recompute.enterNXQL']}"/>
+    </h3>
+
+    <h:form id="imagingThumbRecomputationForm">
+      <h:inputText value="#{imagingRecomputeActions.thumbQuery}"
+        size="80"
+        required="true" />
+      <br/>
+      <h:commandButton value="#{messages['command.recompute']}" styleClass="button"
+        action="#{imagingRecomputeActions.launchPictureViewsRecomputation()}">
+      </h:commandButton>
+    </h:form>
+  </div>
 </div>

@@ -20,6 +20,8 @@
 package org.nuxeo.ecm.imaging.recompute;
 
 import static org.nuxeo.ecm.platform.picture.api.ImagingDocumentConstants.PICTURE_FACET;
+import static org.nuxeo.ecm.platform.video.VideoConstants.VIDEO_FACET;
+import static org.nuxeo.ecm.platform.thumbnail.ThumbnailConstants.THUMBNAIL_FACET;
 
 import java.io.Serializable;
 
@@ -47,6 +49,8 @@ public class ImagingRecomputeActions implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String DEFAULT_NXQL_QUERY = "SELECT * FROM Document WHERE ecm:mixinType = 'Picture' AND picture:views/*/title IS NULL";
+    public static final String VIDEO_NXQL_QUERY = "SELECT * FROM Document WHERE ecm:mixinType = 'Video' AND vid:info/format IS NULL";
+    public static final String THUMB_NXQL_QUERY = "SELECT * FROM Document WHERE ecm:mixinType = 'Thumbnail' AND thumb:thumbnail/data IS NULL";
 
     @In(create = true, required = false)
     protected transient CoreSession documentManager;
@@ -61,6 +65,8 @@ public class ImagingRecomputeActions implements Serializable {
     protected FacesMessages facesMessages;
 
     protected String nxqlQuery = DEFAULT_NXQL_QUERY;
+    protected String videoQuery = VIDEO_NXQL_QUERY;
+    protected String thumbQuery = THUMB_NXQL_QUERY;
 
     public String getNxqlQuery() {
         return nxqlQuery;
@@ -70,12 +76,28 @@ public class ImagingRecomputeActions implements Serializable {
         this.nxqlQuery = nxqlQuery;
     }
 
+    public String getVideoQuery() {
+        return videoQuery;
+    }
+
+    public void setVideoQuery(String nxqlQuery) {
+        this.videoQuery = videoQuery;
+    }
+
+    public String getThumbQuery() {
+        return thumbQuery;
+    }
+
+    public void setThumbQuery(String nxqlQuery) {
+        this.thumbQuery = thumbQuery;
+    }
+
     public void recomputePictureViews() {
         recomputePictureViews(navigationContext.getCurrentDocument());
     }
 
     public void recomputePictureViews(DocumentModel doc) {
-        if (doc.hasFacet(PICTURE_FACET)) {
+        if (doc.hasFacet(PICTURE_FACET) || doc.hasFacet(VIDEO_FACET) || doc.hasFacet(THUMBNAIL_FACET)) {
             BlobHolder blobHolder = doc.getAdapter(BlobHolder.class);
             if (blobHolder.getBlob() != null) {
                 blobHolder.setBlob(blobHolder.getBlob());

@@ -20,6 +20,8 @@
 package org.nuxeo.ecm.imaging.recompute;
 
 import static org.nuxeo.ecm.platform.picture.api.ImagingDocumentConstants.PICTURE_FACET;
+import static org.nuxeo.ecm.platform.video.VideoConstants.VIDEO_FACET;
+import static org.nuxeo.ecm.platform.thumbnail.ThumbnailConstants.THUMBNAIL_FACET;
 
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
@@ -54,7 +56,7 @@ public class ImagingRecomputeWork extends AbstractWork {
 
         setStatus("Generating views");
         for (DocumentModel doc : docs) {
-            if (doc.hasFacet(PICTURE_FACET)) {
+            if (doc.hasFacet(PICTURE_FACET) || doc.hasFacet(VIDEO_FACET) || doc.hasFacet(THUMBNAIL_FACET)) {
                 BlobHolder blobHolder = doc.getAdapter(BlobHolder.class);
                 if (blobHolder.getBlob() != null) {
                     blobHolder.setBlob(blobHolder.getBlob());
